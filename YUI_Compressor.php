@@ -54,6 +54,8 @@ abstract class YUI_Compressor
 	
 	public static function compressCSSFile ($inputFile = '', $outputFile = '', $characterSet = 'utf-8')
 	{
+		XXX_FileSystem_Local::ensurePathExistenceByDestination($outputFile);
+		
 		$outputFile = XXX_Path_Local::makePathRelative(self::$yuiCompressorJAR, $outputFile);
 		
 		$result = XXX_CommandLineHelpers::executeCommandTemplate('executeCSSCompressor', array('javaExecutable' => self::$javaExecutable, 'yuiCompressorJAR' => self::$yuiCompressorJAR, 'inputFile' => $inputFile, 'outputFile' => $outputFile, 'characterSet' => $characterSet));
@@ -67,7 +69,9 @@ abstract class YUI_Compressor
 	}
 	
 	public static function compressJSFile ($inputFile = '', $outputFile = '', $characterSet = 'utf-8')
-	{	
+	{
+		XXX_FileSystem_Local::ensurePathExistenceByDestination($outputFile);
+		
 		$outputFile = XXX_Path_Local::makePathRelative(self::$yuiCompressorJAR, $outputFile);
 			
 		$result = XXX_CommandLineHelpers::executeCommandTemplate('executeJSCompressor', array('javaExecutable' => self::$javaExecutable, 'yuiCompressorJAR' => self::$yuiCompressorJAR, 'inputFile' => $inputFile, 'outputFile' => $outputFile, 'characterSet' => $characterSet));
