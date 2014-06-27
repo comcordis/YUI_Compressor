@@ -11,14 +11,17 @@ abstract class YUI_Compressor
 	{
 		if (XXX_OperatingSystem::$platformName == 'windows')
 		{
-			self::$javaExecutable = 'C:\\Windows\\System32\\java.exe';
+			if (XXX_FileSystem_Local::doesFileExist('C:\\Windows\\System32\\java.exe'))
+			{
+				self::$javaExecutable = 'C:\\Windows\\System32\\java.exe';
+			}
 		}
 		else if (XXX_OperatingSystem::$platformName == 'linux')
 		{
 			self::$javaExecutable = 'java';
 		}
 		
-		$yuiCompressorJARPrefix = XXX_Path_Local::composeOtherProjectDeploymentSourcePathPrefix('YUI_Compressor');
+		$yuiCompressorJARPrefix = XXX_Path_Local::composeProjectDeploymentSourcePathPrefix('YUI_Compressor');
 		
 		self::$yuiCompressorJAR = XXX_Path_Local::extendPath($yuiCompressorJARPrefix, array('build', 'yuicompressor-2.4.7.jar'));
 		
